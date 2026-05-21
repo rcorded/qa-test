@@ -1,14 +1,14 @@
 import Page from './page.js';
 
 class CheckoutOverviewPage extends Page {
-    get inventoryItemName () { return $('.inventory_item_name'); }
-    get itemTotal () { return $('.summary_subtotal_label'); } // total price
-    get btnFinish () { return $('#finish'); }
+    get inventoryItemName() { return $('.inventory_item_name'); }
+    get itemTotal() { return $('.summary_subtotal_label'); }
+    get btnFinish() { return $('#finish'); }
 
-    // complete the checkout process by clicking the finish button
-    async clickFinish () {
+    async clickFinish() {
         await this.btnFinish.click();
     }
 }
 
-export default new CheckoutOverviewPage();
+const checkoutOverviewPage = new CheckoutOverviewPage();
+export default checkoutOverviewPage;

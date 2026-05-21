@@ -1,23 +1,35 @@
 import Page from './page.js';
 
 class LoginPage extends Page {
-    get inputUsername () { return $('#user-name'); }
-    get inputPassword () { return $('#password'); }
-    get btnSubmit () { return $('#login-button'); }
+    get inputUsername() { return $('#user-name'); }
+    get inputPassword() { return $('#password'); }
+    get btnSubmit() { return $('#login-button'); }
+    get errorMessage() { return $('.error-message-container'); }
+    get errorIcons() { return $$('.error_icon'); }
 
-    get errorMessage () { return $('.error-message-container'); }
-    get errorIcons () { return $$('.error_icon'); } // an array of 'x' icons in the input fields
-
-
-    async login (username, password) {
+    async login(username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.btnSubmit.click();
     }
 
-    open () {
+    async setUsername(username) {
+        await this.inputUsername.setValue(username);
+    }
+
+    async setPassword(password) {
+        await this.inputPassword.setValue(password);
+    }
+
+    async clickSubmit() {
+        await this.btnSubmit.click();
+    }
+
+    open() {
         return super.open('');
     }
 }
 
-export default new LoginPage();
+const loginPage = new LoginPage();
+export default loginPage;
+

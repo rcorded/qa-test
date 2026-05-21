@@ -1,20 +1,33 @@
 import Page from './page.js';
 
 class CheckoutInfoPage extends Page {
-    get inputFirstName () { return $('#first-name'); }
-    get inputLastName () { return $('#last-name'); }
-    get inputPostalCode () { return $('#postal-code'); }
-    get btnContinue () { return $('#continue'); }
+    get inputFirstName() { return $('#first-name'); }
+    get inputLastName() { return $('#last-name'); }
+    get inputPostalCode() { return $('#postal-code'); }
+    get btnContinue() { return $('#continue'); }
 
-    async fillForm (firstName, lastName, postalCode) {
+    async fillForm(firstName, lastName, postalCode) {
         await this.inputFirstName.setValue(firstName);
         await this.inputLastName.setValue(lastName);
         await this.inputPostalCode.setValue(postalCode);
     }
 
-    async clickContinue () {
+    async clickContinue() {
         await this.btnContinue.click();
+    }
+
+    async getFirstNameValue() {
+        return await this.inputFirstName.getValue();
+    }
+
+    async getLastNameValue() {
+        return await this.inputLastName.getValue();
+    }
+
+    async getPostalCodeValue() {
+        return await this.inputPostalCode.getValue();
     }
 }
 
-export default new CheckoutInfoPage();
+const checkoutInfoPage = new CheckoutInfoPage();
+export default checkoutInfoPage;

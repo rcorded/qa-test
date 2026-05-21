@@ -1,12 +1,13 @@
 import Page from './page.js';
 
 class CheckoutCompletePage extends Page {
-    get completeHeader () { return $('.complete-header'); } // success message element
-    get btnBackHome () { return $('#back-to-products'); }
+    get completeHeader() { return $('.complete-header'); }
+    get btnBackHome() { return $('#back-to-products'); }
 
-    async clickBackHome () {
+    async clickBackHome() {
         await this.btnBackHome.click();
     }
 }
 
-export default new CheckoutCompletePage();
+const checkoutCompletePage = new CheckoutCompletePage();
+export default checkoutCompletePage;

@@ -1,29 +1,28 @@
-import LoginPage from '../pageobjects/login.page.js';
-import InventoryPage from '../pageobjects/inventory.page.js';
-import CartPage from '../pageobjects/cart.page.js';
+import loginPage from '../pageobjects/login.page.js';
+import inventoryPage from '../pageobjects/inventory.page.js';
+import cartPage from '../pageobjects/cart.page.js';
+import { URLS, ERROR_MESSAGES } from '../data/constants.js';
 
 describe('Test Case ID 9: Checkout without products', () => {
-    
     before(async () => {
-        // Precondition: User is on the logined account and on the inventory page
-        await LoginPage.open();
-        await LoginPage.login('standard_user', 'secret_sauce');
-        await expect(browser).toHaveUrl(expect.stringContaining('inventory.html'));
+        await loginPage.open();
+        await loginPage.login('standard_user', 'secret_sauce');
+    });
+
+    it('Should be on the inventory page', async () => {
+        await expect(browser).toHaveUrl(expect.stringContaining(URLS.INVENTORY));
     });
 
     it('Step 1: Click on the "Cart" button at the top right corner', async () => {
-        await InventoryPage.goToCart();
-        
-        await expect(browser).toHaveUrl(expect.stringContaining('cart.html'));
-        await expect(CartPage.cartItems).toBeElementsArrayOfSize(0);
+        await inventoryPage.goToCart();
+        await expect(browser).toHaveUrl(expect.stringContaining(URLS.CART));
+        await expect(cartPage.cartItems).toBeElementsArrayOfSize(0);
     });
 
     it('Step 2: Click on the "Checkout" button', async () => {
-        await CartPage.clickCheckout();
-
-        await expect(browser).toHaveUrl(expect.stringContaining('cart.html'));
-        await expect(CartPage.errorMessage).toBeDisplayed();
-        
-        await expect(CartPage.errorMessage).toHaveText(expect.stringContaining('Cart is empty'));
+        await cartPage.clickCheckout();
+        await expect(browser).toHaveUrl(expect.stringContaining(URLS.CART));
+        await expect(cartPage.errorMessage).toBeDisplayed();
+        await expect(cartPage.errorMessage).toHaveText(expect.stringContaining(ERROR_MESSAGES.EMPTY_CART));
     });
 });

@@ -1,34 +1,29 @@
-import LoginPage from '../pageobjects/login.page.js';
-import InventoryPage from '../pageobjects/inventory.page.js';
+import loginPage from '../pageobjects/login.page.js';
+import inventoryPage from '../pageobjects/inventory.page.js';
+import { URLS } from '../data/constants.js';
 
 describe('Test Case ID 4: Logout', () => {
-
     before(async () => {
-        // Precondition: User is logged into the account and on the inventory page
-        await LoginPage.open();
-        await LoginPage.login('standard_user', 'secret_sauce');
-        await expect(browser).toHaveUrl(expect.stringContaining('inventory.html'));
+        await loginPage.open();
+        await loginPage.login('standard_user', 'secret_sauce');
     });
 
-    it('Step 1: Click on the "Burger" button at the top left corner', async () => {
-        await InventoryPage.openMenu();
-        
-        // сheck that there are only 4 menu items
-        await expect(InventoryPage.menuItems).toBeElementsArrayOfSize(4);
-        
-        for (const item of await InventoryPage.menuItems) {
-            await expect(item).toBeDisplayed(); // check if the items are displayed
+    it('Should be on the inventory page', async () => {
+        await expect(browser).toHaveUrl(expect.stringContaining(URLS.INVENTORY));
+    });
+
+    it('Step 1: Click "Burger" menu button', async () => {
+        await inventoryPage.openMenu();
+        await expect(inventoryPage.menuItems).toBeElementsArrayOfSize(4);
+        for (const item of await inventoryPage.menuItems) {
+            await expect(item).toBeDisplayed();
         }
     });
 
-    it('Step 2: Click on the "Logout" button', async () => {
-        await InventoryPage.logout();
-        
-        // check if user are redirected to the "Login" page
-        await expect(browser).toHaveUrl(`${browser.options.baseUrl}/`);
-        
-        // check if "Username" and "Password" field are empty
-        await expect(LoginPage.inputUsername).toHaveValue('');
-        await expect(LoginPage.inputPassword).toHaveValue('');
+    it('Step 2: Click "Logout" button', async () => {
+        await inventoryPage.logout();
+        await expect(browser).toHaveUrl(`${URLS.BASE}/`);
+        await expect(loginPage.inputUsername).toHaveValue('');
+        await expect(loginPage.inputPassword).toHaveValue('');
     });
 });

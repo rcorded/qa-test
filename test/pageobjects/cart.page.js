@@ -1,17 +1,18 @@
 import Page from './page.js';
 
 class CartPage extends Page {
+    get cartItems() { return $$('.cart_item'); }
+    get btnCheckout() { return $('#checkout'); }
+    get errorMessage() { return $('.error-message-container'); }
 
-    // get an array of all items in the cart
-    get cartItems () { return $$('.cart_item'); }
-    get btnCheckout () { return $('#checkout'); }
-    
-    // selector for the error message 
-    get errorMessage () { return $('.error-message-container'); }
-
-    async clickCheckout () {
+    async clickCheckout() {
         await this.btnCheckout.click();
+    }
+
+    async getCartItemsCount() {
+        return await this.cartItems.length;
     }
 }
 
-export default new CartPage();
+const cartPage = new CartPage();
+export default cartPage;
