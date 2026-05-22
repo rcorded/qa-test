@@ -1,12 +1,12 @@
 import loginPage from '../pageobjects/login.page.js';
 import inventoryPage from '../pageobjects/inventory.page.js';
 import cartPage from '../pageobjects/cart.page.js';
-import { URLS, ERROR_MESSAGES } from '../data/constants.js';
+import { URLS, ERROR_MESSAGES, CREDENTIALS } from '../data/constants.js';
 
 describe('Test Case ID 9: Checkout without products', () => {
     before(async () => {
         await loginPage.open();
-        await loginPage.login('standard_user', 'secret_sauce');
+        await loginPage.login(CREDENTIALS.VALID_USER, CREDENTIALS.PASSWORD);
     });
 
     it('Should be on the inventory page', async () => {
@@ -26,3 +26,6 @@ describe('Test Case ID 9: Checkout without products', () => {
         await expect(cartPage.errorMessage).toHaveText(expect.stringContaining(ERROR_MESSAGES.EMPTY_CART));
     });
 });
+
+
+

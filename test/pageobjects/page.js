@@ -1,4 +1,6 @@
 import { browser } from '@wdio/globals'
+import { URLS } from '../data/constants.js';
+
 
 /**
 * main page object containing all methods, selectors and functionality
@@ -10,6 +12,6 @@ export default class Page {
     * @param path path of the sub page (e.g. /path/to/page.html)
     */
     open (path) {
-        return browser.url(`${browser.options.baseUrl}/${path}`)
+        return browser.url(`${URLS.BASE}/${path}`)
     }
 }

@@ -1,11 +1,11 @@
 import loginPage from '../pageobjects/login.page.js';
 import inventoryPage from '../pageobjects/inventory.page.js';
-import { URLS } from '../data/constants.js';
+import { URLS, CREDENTIALS } from '../data/constants.js';
 
 describe('Test Case ID 4: Logout', () => {
     before(async () => {
         await loginPage.open();
-        await loginPage.login('standard_user', 'secret_sauce');
+        await loginPage.login(CREDENTIALS.VALID_USER, CREDENTIALS.PASSWORD);
     });
 
     it('Should be on the inventory page', async () => {

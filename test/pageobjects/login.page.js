@@ -30,6 +30,5 @@ class LoginPage extends Page {
     }
 }
 
-const loginPage = new LoginPage();
-export default loginPage;
+export default new LoginPage()
 

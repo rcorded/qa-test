@@ -4,7 +4,7 @@ import cartPage from '../pageobjects/cart.page.js';
 import checkoutInfoPage from '../pageobjects/checkout.info.page.js';
 import checkoutOverviewPage from '../pageobjects/checkout.overview.page.js';
 import checkoutCompletePage from '../pageobjects/checkout.complete.page.js';
-import { URLS } from '../data/constants.js';
+import { URLS, SUCCESS_MESSAGES, CREDENTIALS } from '../data/constants.js';
 import { faker } from '@faker-js/faker';
 
 describe('Test Case ID 8: Valid Checkout', () => {
@@ -16,11 +16,14 @@ describe('Test Case ID 8: Valid Checkout', () => {
 
     before(async () => {
         await loginPage.open();
-        await loginPage.login('standard_user', 'secret_sauce');
-        await expect(browser).toHaveUrl(expect.stringContaining(URLS.INVENTORY));
+        await loginPage.login(CREDENTIALS.VALID_USER, CREDENTIALS.PASSWORD);
         firstName = faker.person.firstName();
         lastName = faker.person.lastName();
         postalCode = faker.location.zipCode();
+    });
+
+    it('Should be on the inventory page', async () => {
+        await expect(browser).toHaveUrl(expect.stringContaining(URLS.INVENTORY));
     });
 
     it('Step 1: Click on the "Add to cart" button near any product', async () => {
@@ -33,8 +36,7 @@ describe('Test Case ID 8: Valid Checkout', () => {
     it('Step 2: Click on the "Cart" button at the top right corner', async () => {
         await inventoryPage.goToCart();
         await expect(browser).toHaveUrl(expect.stringContaining(URLS.CART));
-        const cartItemName = await cartPage.cartItems[0].$('.inventory_item_name');
-        await expect(cartItemName).toHaveText(savedProductName);
+        await expect(cartPage.firstCartItemName).toHaveText(savedProductName);
     });
 
     it('Step 3: Click on the "Checkout" button', async () => {
@@ -60,7 +62,7 @@ describe('Test Case ID 8: Valid Checkout', () => {
     it('Step 8: Click on the "Finish" button', async () => {
         await checkoutOverviewPage.clickFinish();
         await expect(browser).toHaveUrl(expect.stringContaining(URLS.CHECKOUT_COMPLETE));
-        await expect(checkoutCompletePage.completeHeader).toHaveText('Thank you for your order!');
+        await expect(checkoutCompletePage.completeHeader).toHaveText(SUCCESS_MESSAGES.CHECKOUT_COMPLETE);
     });
 
     it('Step 9: Click on the "Back Home" button', async () => {

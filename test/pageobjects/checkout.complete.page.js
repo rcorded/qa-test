@@ -9,5 +9,4 @@ class CheckoutCompletePage extends Page {
     }
 }
 
-const checkoutCompletePage = new CheckoutCompletePage();
-export default checkoutCompletePage;
+export default new CheckoutCompletePage();

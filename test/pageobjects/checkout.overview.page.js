@@ -10,5 +10,4 @@ class CheckoutOverviewPage extends Page {
     }
 }
 
-const checkoutOverviewPage = new CheckoutOverviewPage();
-export default checkoutOverviewPage;
+export default new CheckoutOverviewPage();

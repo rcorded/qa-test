@@ -4,6 +4,7 @@ class CartPage extends Page {
     get cartItems() { return $$('.cart_item'); }
     get btnCheckout() { return $('#checkout'); }
     get errorMessage() { return $('.error-message-container'); }
+    get firstCartItemName() { return $$('.inventory_item_name')[0]; }
 
     async clickCheckout() {
         await this.btnCheckout.click();
@@ -14,5 +15,4 @@ class CartPage extends Page {
     }
 }
 
-const cartPage = new CartPage();
-export default cartPage;
+export default new CartPage();

@@ -67,5 +67,4 @@ class InventoryPage extends Page {
     }
 }
 
-const inventoryPage = new InventoryPage();
-export default inventoryPage;
+export default new InventoryPage();

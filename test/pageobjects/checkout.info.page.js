@@ -29,5 +29,4 @@ class CheckoutInfoPage extends Page {
     }
 }
 
-const checkoutInfoPage = new CheckoutInfoPage();
-export default checkoutInfoPage;
+export default new CheckoutInfoPage();

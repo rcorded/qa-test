@@ -12,3 +12,19 @@ export const ERROR_MESSAGES = {
     LOCKED_OUT_USER: 'Epic sadface: Sorry, this user has been locked out.',
     EMPTY_CART: 'Cart is empty',
 };
+
+export const SUCCESS_MESSAGES = {
+    CHECKOUT_COMPLETE: 'Thank you for your order!',
+};
+
+export const SOCIAL_URLS = {
+    TWITTER: /twitter\.com|x\.com/,
+    FACEBOOK: 'facebook.com',
+    LINKEDIN: 'linkedin.com'
+};
+
+export const CREDENTIALS = {
+    VALID_USER: 'standard_user',
+    LOCKED_USER: 'locked_out_user',
+    PASSWORD: 'secret_sauce'
+};

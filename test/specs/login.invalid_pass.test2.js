@@ -1,5 +1,5 @@
 import loginPage from '../pageobjects/login.page.js';
-import { URLS, ERROR_MESSAGES } from '../data/constants.js';
+import { URLS, ERROR_MESSAGES, CREDENTIALS } from '../data/constants.js';
 import { faker } from '@faker-js/faker';
 
 describe('Test Case ID 2: Login with invalid password', () => {
@@ -12,8 +12,8 @@ describe('Test Case ID 2: Login with invalid password', () => {
     });
 
     it('Step 1: Enter valid login into "Login" field', async () => {
-        await loginPage.setUsername('standard_user');
-        await expect(loginPage.inputUsername).toHaveValue('standard_user');
+        await loginPage.setUsername(CREDENTIALS.VALID_USER);
+        await expect(loginPage.inputUsername).toHaveValue(CREDENTIALS.VALID_USER);
     });
 
     it('Step 2: Enter invalid password into "Password" field', async () => {
@@ -35,3 +35,5 @@ describe('Test Case ID 2: Login with invalid password', () => {
         await expect(loginPage.errorMessage).toHaveText(expect.stringContaining(ERROR_MESSAGES.INVALID_CREDENTIALS));
     });
 });
+
+

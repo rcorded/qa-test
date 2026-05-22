@@ -1,6 +1,6 @@
 import loginPage from '../pageobjects/login.page.js';
 import inventoryPage from '../pageobjects/inventory.page.js';
-import { URLS } from '../data/constants.js';
+import { URLS, CREDENTIALS } from '../data/constants.js';
 
 describe('Test Case ID 1: Valid Login', () => {
     before(async () => {
@@ -12,13 +12,13 @@ describe('Test Case ID 1: Valid Login', () => {
     });
 
     it('Step 1: Enter valid login into "Login" field', async () => {
-        await loginPage.setUsername('standard_user');
-        await expect(loginPage.inputUsername).toHaveValue('standard_user');
+        await loginPage.setUsername(CREDENTIALS.VALID_USER);
+        await expect(loginPage.inputUsername).toHaveValue(CREDENTIALS.VALID_USER);
     });
 
     it('Step 2: Enter valid password into "Password" field', async () => {
-        await loginPage.setPassword('secret_sauce');
-        await expect(loginPage.inputPassword).toHaveValue('secret_sauce');
+        await loginPage.setPassword(CREDENTIALS.PASSWORD);
+        await expect(loginPage.inputPassword).toHaveValue(CREDENTIALS.PASSWORD);
         await expect(loginPage.inputPassword).toHaveAttribute('type', 'password');
     });
 

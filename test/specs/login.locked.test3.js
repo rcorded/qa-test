@@ -1,5 +1,5 @@
 import loginPage from '../pageobjects/login.page.js';
-import { URLS, ERROR_MESSAGES } from '../data/constants.js';
+import { URLS, ERROR_MESSAGES, CREDENTIALS } from '../data/constants.js';
 
 describe('Test Case ID 3: Login with locked out test login', () => {
     before(async () => {
@@ -11,13 +11,13 @@ describe('Test Case ID 3: Login with locked out test login', () => {
     });
 
     it('Step 1: Enter valid login into "Login" field', async () => {
-        await loginPage.setUsername('locked_out_user');
-        await expect(loginPage.inputUsername).toHaveValue('locked_out_user');
+        await loginPage.setUsername(CREDENTIALS.LOCKED_USER);
+        await expect(loginPage.inputUsername).toHaveValue(CREDENTIALS.LOCKED_USER);
     });
 
     it('Step 2: Enter valid password into "Password" field', async () => {
-        await loginPage.setPassword('secret_sauce');
-        await expect(loginPage.inputPassword).toHaveValue('secret_sauce');
+        await loginPage.setPassword(CREDENTIALS.PASSWORD);
+        await expect(loginPage.inputPassword).toHaveValue(CREDENTIALS.PASSWORD);
         await expect(loginPage.inputPassword).toHaveAttribute('type', 'password');
     });
 
@@ -33,3 +33,5 @@ describe('Test Case ID 3: Login with locked out test login', () => {
         await expect(loginPage.errorMessage).toHaveText(expect.stringContaining(ERROR_MESSAGES.LOCKED_OUT_USER));
     });
 });
+
+
