@@ -28,3 +28,17 @@ export const CREDENTIALS = {
     LOCKED_USER: 'locked_out_user',
     PASSWORD: 'secret_sauce'
 };
+
+export const SORT_VALUES = {
+    AZ: 'az',
+    ZA: 'za',
+    LOW_HIGH: 'lohi',
+    HIGH_LOW: 'hilo'
+};
+
+export const EXPECTED_COUNTS = {
+    CART_BADGE_ONE: '1', 
+    MENU_ITEMS: 4,
+    ERROR_ICONS: 2,
+    EMPTY_CART_ITEMS: 0        
+};

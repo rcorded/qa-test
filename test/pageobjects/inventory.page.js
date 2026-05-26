@@ -2,6 +2,7 @@ import Page from './page.js';
 
 class InventoryPage extends Page {
     get cartIcon() { return $('.shopping_cart_link'); }
+    get inventoryContainer() { return $('.inventory_container'); }
     get cartBadge() { return $('.shopping_cart_badge'); }
     get firstProductAddBtn() { return $$('.btn_inventory')[0]; }
     get firstProductName() { return $$('.inventory_item_name')[0]; }
@@ -64,6 +65,11 @@ class InventoryPage extends Page {
 
     async logout() {
         await this.logoutBtn.click();
+    }
+
+    async waitForPageToLoad() {
+        await this.cartIcon.waitForDisplayed();
+        await this.inventoryContainer.waitForDisplayed();
     }
 }
 

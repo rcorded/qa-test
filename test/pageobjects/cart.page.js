@@ -9,10 +9,6 @@ class CartPage extends Page {
     async clickCheckout() {
         await this.btnCheckout.click();
     }
-
-    async getCartItemsCount() {
-        return await this.cartItems.length;
-    }
 }
 
 export default new CartPage();

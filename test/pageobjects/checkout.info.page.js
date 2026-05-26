@@ -15,18 +15,6 @@ class CheckoutInfoPage extends Page {
     async clickContinue() {
         await this.btnContinue.click();
     }
-
-    async getFirstNameValue() {
-        return await this.inputFirstName.getValue();
-    }
-
-    async getLastNameValue() {
-        return await this.inputLastName.getValue();
-    }
-
-    async getPostalCodeValue() {
-        return await this.inputPostalCode.getValue();
-    }
 }
 
 export default new CheckoutInfoPage();

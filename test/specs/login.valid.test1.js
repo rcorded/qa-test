@@ -7,23 +7,20 @@ describe('Test Case ID 1: Valid Login', () => {
         await loginPage.open();
     });
 
-    it('Should be on the login page', async () => {
+    it('TC-1: should successfully log in with valid credentials', async () => {        
         await expect(browser).toHaveUrl(`${URLS.BASE}/`);
-    });
 
-    it('Step 1: Enter valid login into "Login" field', async () => {
+        // Step 1: Enter valid login into "Login" field
         await loginPage.setUsername(CREDENTIALS.VALID_USER);
         await expect(loginPage.inputUsername).toHaveValue(CREDENTIALS.VALID_USER);
-    });
 
-    it('Step 2: Enter valid password into "Password" field', async () => {
+        // Step 2: Enter valid password into "Password" field
         await loginPage.setPassword(CREDENTIALS.PASSWORD);
         await expect(loginPage.inputPassword).toHaveValue(CREDENTIALS.PASSWORD);
         await expect(loginPage.inputPassword).toHaveAttribute('type', 'password');
-    });
 
-    it('Step 3: Click "Login" button', async () => {
-        await loginPage.clickSubmit();
+        // Step 3: Click "Login" button
+        await loginPage.clickSubmit();    
         await expect(browser).toHaveUrl(expect.stringContaining(URLS.INVENTORY));
         await expect(inventoryPage.firstProductName).toBeDisplayed();
         await expect(inventoryPage.cartIcon).toBeDisplayed();

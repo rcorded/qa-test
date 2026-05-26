@@ -5,43 +5,42 @@ import { URLS, SOCIAL_URLS, CREDENTIALS } from '../data/constants.js';
 describe('Test Case ID 7: Footer Links', () => {
     let mainTabId;
 
+    const verifySocialLink = async (clickAction, expectedUrl) => {
+        await clickAction(); 
+        await browser.waitUntil(async () => (await browser.getWindowHandles()).length > 1);
+        const handles = await browser.getWindowHandles(); 
+        await browser.switchToWindow(handles[1]);
+        await expect(browser).toHaveUrl(expectedUrl); 
+        await browser.closeWindow();
+        await browser.switchToWindow(mainTabId); 
+    };
+
     before(async () => {
         await loginPage.open();
-        await loginPage.login(CREDENTIALS.VALID_USER, CREDENTIALS.PASSWORD);
+        await loginPage.login(CREDENTIALS.VALID_USER, CREDENTIALS.PASSWORD); 
+        await inventoryPage.waitForPageToLoad();       
         mainTabId = await browser.getWindowHandle();
     });
 
-    it('Should be on the inventory page', async () => {
+    it('TC-7: should open Twitter, Facebook, and LinkedIn links in new tabs', async () => {
         await expect(browser).toHaveUrl(expect.stringContaining(URLS.INVENTORY));
-    });
 
-    it('Step 1: Click on the "Twitter" icon and verify new tab', async () => {
-        await inventoryPage.clickTwitter();
-        await browser.waitUntil(async () => (await browser.getWindowHandles()).length > 1);
-        const handles = await browser.getWindowHandles();
-        await browser.switchToWindow(handles[1]);
-        await expect(browser).toHaveUrl(SOCIAL_URLS.TWITTER);
-        await browser.closeWindow();
-        await browser.switchToWindow(mainTabId);
-    });
+        // Step 1: Click on the "Twitter" icon and verify new tab
+        await verifySocialLink(
+            async () => await inventoryPage.clickTwitter(), 
+            SOCIAL_URLS.TWITTER
+        );
 
-    it('Step 2: Click on the "Facebook" icon and verify new tab', async () => {
-        await inventoryPage.clickFacebook();
-        await browser.waitUntil(async () => (await browser.getWindowHandles()).length > 1);
-        const handles = await browser.getWindowHandles();
-        await browser.switchToWindow(handles[1]);
-        await expect(browser).toHaveUrl(expect.stringContaining(SOCIAL_URLS.FACEBOOK));
-        await browser.closeWindow();
-        await browser.switchToWindow(mainTabId);
-    });
+        // Step 2: Click on the "Facebook" icon and verify new tab
+        await verifySocialLink(
+            async () => await inventoryPage.clickFacebook(), 
+            expect.stringContaining(SOCIAL_URLS.FACEBOOK)
+        );
 
-    it('Step 3: Click on the "Linkedin" icon and verify new tab', async () => {
-        await inventoryPage.clickLinkedin();
-        await browser.waitUntil(async () => (await browser.getWindowHandles()).length > 1);
-        const handles = await browser.getWindowHandles();
-        await browser.switchToWindow(handles[1]);
-        await expect(browser).toHaveUrl(expect.stringContaining(SOCIAL_URLS.LINKEDIN));
-        await browser.closeWindow();
-        await browser.switchToWindow(mainTabId);
+        // Step 3: Click on the "Linkedin" icon and verify new tab
+        await verifySocialLink(
+            async () => await inventoryPage.clickLinkedin(), 
+            expect.stringContaining(SOCIAL_URLS.LINKEDIN)
+        );
     });
 });
